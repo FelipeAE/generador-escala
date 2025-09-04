@@ -1,12 +1,78 @@
-# React + Vite
+# Generador de Escala de Notas Chilenas
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Una aplicación web moderna para generar escalas de calificación académica según el sistema educativo chileno. Desarrollada con React, TypeScript y Vite.
 
-Currently, two official plugins are available:
+🔗 **Ver aplicación en vivo**: [https://felipeae.github.io/generador-escala/](https://felipeae.github.io/generador-escala/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Características
 
-## Expanding the ESLint configuration
+✨ **Interfaz moderna**: Diseño colorido con gradientes y efectos glassmorphism  
+📊 **Tabla horizontal**: Layout optimizado que aprovecha todo el ancho de pantalla  
+⚙️ **Configuración flexible**: Personaliza todos los parámetros de la escala  
+📁 **Exportación**: Descarga en formato CSV o imprime directamente  
+📱 **Responsive**: Funciona perfectamente en dispositivos móviles  
+🧮 **Fórmula oficial**: Implementa correctamente la escala chilena de dos segmentos  
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Fórmula Implementada
+
+La aplicación utiliza la fórmula oficial chilena de escala de notas con dos segmentos:
+
+- **Tramo reprobatorio** (puntaje < puntaje de aprobación):
+  ```
+  nota = nmin + (napr - nmin) * (puntaje / (pmax * e))
+  ```
+
+- **Tramo aprobatorio** (puntaje ≥ puntaje de aprobación):
+  ```
+  nota = napr + (nmax - napr) * ((puntaje - pmax*e) / (pmax*(1-e)))
+  ```
+
+**Donde:**
+- `nmax` = Nota máxima (7.0)
+- `nmin` = Nota mínima (1.0) 
+- `napr` = Nota de aprobación (4.0)
+- `e` = Exigencia como decimal (60% = 0.6)
+- `pmax` = Puntaje máximo (100)
+
+## Desarrollo
+
+```bash
+# Instalar dependencias
+npm install
+
+# Ejecutar en modo desarrollo
+npm run dev
+
+# Construir para producción
+npm run build
+
+# Linter
+npm run lint
+
+# Desplegar a GitHub Pages
+npm run deploy
+```
+
+## Tecnologías
+
+- **React 19** - Biblioteca de interfaz de usuario
+- **TypeScript** - Tipado estático
+- **Vite** - Build tool y servidor de desarrollo
+- **Lucide React** - Iconos modernos
+- **GitHub Actions** - CI/CD automático
+- **GitHub Pages** - Hosting
+
+## Arquitectura
+
+- `src/hooks/useGradeScale.ts` - Lógica principal y cálculos de la escala
+- `src/types/index.ts` - Interfaces y tipos TypeScript
+- `src/App.tsx` - Componente principal con UI y interacciones
+- `src/index.css` - Estilos modernos con gradientes y animaciones
+
+## Contribuir
+
+1. Fork el repositorio
+2. Crea una rama para tu feature (`git checkout -b feature/nueva-caracteristica`)
+3. Commit tus cambios (`git commit -m 'Agrega nueva característica'`)
+4. Push a la rama (`git push origin feature/nueva-caracteristica`)
+5. Abre un Pull Request
